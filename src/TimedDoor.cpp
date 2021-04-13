@@ -1,7 +1,7 @@
 // Copyright 13.04.21 DenisKabanov
 
 #include <iostream>
-#include "windows.h"
+#include <unistd.h>
 #include "TimedDoor.h"
 
 DoorTimerAdapter::DoorTimerAdapter(TimedDoor& tDoor) : doorTA(tDoor) {}
@@ -43,7 +43,7 @@ void TimedDoor::throwState() {
 }
 
 void Timer::sleep(int delayTime) {
-  Sleep(delayTime * 1000);
+  usleep(delayTime * 1000);
 }
 
 void Timer::tregister(int delayTime, TimerClient* adapter) {
