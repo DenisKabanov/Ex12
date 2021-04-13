@@ -1,8 +1,7 @@
 // Copyright 13.04.21 DenisKabanov
 
 #include <iostream>
-#include <thread>
-#include <chrono>
+#include <unistd.h>
 #include "TimedDoor.h"
 
 DoorTimerAdapter::DoorTimerAdapter(TimedDoor& tDoor) : doorTA(tDoor) {}
@@ -46,7 +45,7 @@ void TimedDoor::throwState() {
 }
 
 void Timer::sleep(int delayTime) {
-  std::this_thread::sleep_for(std::chrono::seconds(delayTime));
+    usleep(1000000 * delayTime);
 }
 
 void Timer::tregister(int delayTime, TimerClient* adapter) {
