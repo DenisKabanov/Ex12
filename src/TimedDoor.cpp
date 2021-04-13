@@ -1,7 +1,7 @@
 // Copyright 13.04.21 DenisKabanov
 
-#include <iostream>
 #include <unistd.h>
+#include <iostream>
 #include "TimedDoor.h"
 
 DoorTimerAdapter::DoorTimerAdapter(TimedDoor& tDoor) : doorTA(tDoor) {}
