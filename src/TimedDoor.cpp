@@ -1,7 +1,8 @@
 // Copyright 13.04.21 DenisKabanov
 
 #include <iostream>
-#include <unistd.h>
+#include <thread>
+#include <chrono>
 #include "TimedDoor.h"
 
 DoorTimerAdapter::DoorTimerAdapter(TimedDoor& tDoor) : doorTA(tDoor) {}
@@ -35,15 +36,17 @@ void TimedDoor::DoorTimeOut() {
 }
 
 void TimedDoor::throwState() {
+  std::string message;
   if (isDoorOpened() == true) {
-    throw("close the door!");
+    message = "close the door!";
   } else {
-    throw("the door is closed!");
+    message = "the door is closed!";
   }
+  throw(message);
 }
 
 void Timer::sleep(int delayTime) {
-  usleep(delayTime * 1000);
+  std::this_thread::sleep_for(std::chrono::seconds(delayTime));
 }
 
 void Timer::tregister(int delayTime, TimerClient* adapter) {
